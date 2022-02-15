@@ -1,0 +1,136 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}
+Post List
+{% endblock %}
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>name of article</th>
+                      <th>content</th>
+                      <th>Date</th>
+                      <th>image</th>
+                      <th>Status</th>
+                      {% if user.is_superuser %}
+                        <th>author</th>
+                        {% endif %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {% for PostModel in article %}
+                      <td>{{ PostModel.title }}</td>
+                      <td>{{ PostModel.content|truncatewords:5 }}</td>
+                      <td>{{ PostModel.date }}</td>
+                          <td><a href="{{ PostModel.thumbnail.url }}" target="_blank"><img src="{{ PostModel.thumbnail.url }}" width="70px" height="50px"></td></a>
+                      <td>
+                        {% if PostModel.status == "p" %}
+                            <span class="badge badge-success">published</span><br>
+                            <a class="badge badge-primary" target="_blank" href="{% url 'page:slug' PostModel.slug %}">show</a>
+                            {% if user.is_superuser %}
+                            <a class="badge badge-info" href="{% url 'account:Post-Update' PostModel.pk %}">edit</a><br>
+                            <a class="badge text-danger" href="{% url 'account:Post-Delete' PostModel.pk %}">delete</a>
+                            {% endif %}
+
+                         {% else %}
+                            <span class="badge badge-danger">Draft</span><br>
+                            <a class="badge badge-info" href="{% url 'account:Post-Update' PostModel.pk %}">edit</a>
+                            {% if user.is_superuser %}
+                            <a class="badge text-danger" href="{% url 'account:Post-Delete' PostModel.pk %}">delete</a>
+                                {% endif %}
+                         {% endif %}
+                      </td>
+                          {% if user.is_superuser %}
+                          <td>{{ PostModel.author }}</td>
+                          {% endif %}
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- /.card-body -->
+            <!-- /.card -->
+
+{% endblock %}
+
+
+
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>User</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>183</td>
+                      <td>John Doe</td>
+                      <td>11-7-2014</td>
+                      <td><span class="tag tag-success">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                    <tr>
+                      <td>219</td>
+                      <td>Alexander Pierce</td>
+                      <td>11-7-2014</td>
+                      <td><span class="tag tag-warning">Pending</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                    <tr>
+                      <td>657</td>
+                      <td>Bob Doe</td>
+                      <td>11-7-2014</td>
+                      <td><span class="tag tag-primary">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                    <tr>
+                      <td>175</td>
+                      <td>Mike Doe</td>
+                      <td>11-7-2014</td>
+                      <td><span class="tag tag-danger">Denied</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+</div>

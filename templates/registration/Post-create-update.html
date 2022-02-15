@@ -1,0 +1,52 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+Create Post
+{% endblock %}
+
+{% block main %}
+    <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-green">
+              <div class="card-header">
+                <h3 class="card-title float-right">Create Post Page</h3><br>
+
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="card-body">
+        <div class="row">
+            {% if user.is_superuser %}
+      <div class="col-6">
+        {{ form.status|as_crispy_field }}
+      </div>
+            <div class="col-6">
+        {{ form.author|as_crispy_field }}
+      </div>
+            {% endif %}
+        </div>
+        <div class="row">
+      <div class="col-6">
+        {{ form.title|as_crispy_field }}
+      </div>
+            <div class="col-6">
+        {{ form.slug|as_crispy_field }}
+      </div>
+        </div>
+         <div class="row">
+      <div class="col-12">
+        {{ form.content|as_crispy_field }}
+      </div>
+        </div>
+        <div class="row">
+      <div class="col-6">
+        {{ form.thumbnail|as_crispy_field }}
+      </div>
+        </div>
+    <button class="btn btn-outline-light">send Post</button>
+    </form>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
