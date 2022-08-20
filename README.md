@@ -1,7 +1,7 @@
 # weblog_django_prj
 
 ## description
-in this project i maked weblog(just with django) whitch have good features like:<br>
+in this project i maked weblog(just with django) whitch have good features like:<br><br>
 -comment: your user can send comment for posts and you(super Admin) can management comments "delete edit publish and another"<br>
 -admin pannel: if you have admin for post on your weblog, you have personalized admin pannel for they.<br>
 -edit profile: your users and your admins can edit their personality information with restrictions<br>
