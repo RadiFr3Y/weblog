@@ -13,7 +13,7 @@ in this project i maked weblog(just with django) whitch have good features like:
 cd directory
 mkdir weblog
 cd weblog 
-git clone https://github.com/theFr3Y/weblog_django_prj.git
+git clone https://github.com/RadiFr3Y/weblog.git
 pip install -r require.txt
 python manage.py makemigrations
 python manage.py migrate
